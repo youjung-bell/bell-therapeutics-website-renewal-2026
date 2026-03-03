@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bell Therapeutics — Press 와이어프레임</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #f5f5f5; color: #111; }
+  .doc-header { background: #111; color: #fff; padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .doc-header .title { font-size: 14px; font-weight: 700; }
+  .doc-header .meta { font-size: 11px; color: #999; }
+  .doc-header a { color: #999; text-decoration: none; font-size: 11px; }
+  .doc-header a:hover { color: #fff; }
+  .canvas { max-width: 1200px; margin: 40px auto; padding: 0 48px; }
+  .wf-section { background: #fff; border: 1px solid #ddd; margin-bottom: 2px; position: relative; }
+  .wf-section-label { position: absolute; top: 0; left: -1px; background: #111; color: #fff; font-size: 10px; font-weight: 600; padding: 3px 10px; letter-spacing: 0.5px; }
+  .wf-inner { padding: 48px 40px; }
+  .wf-nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; border-bottom: 1px solid #ddd; font-size: 13px; }
+  .wf-nav .logo { font-weight: 700; letter-spacing: 1px; }
+  .wf-nav .nav-links { display: flex; gap: 32px; }
+  .wf-nav .nav-links a { color: #666; text-decoration: none; }
+  .wf-nav .nav-links a:hover { color: #111; }
+  .wf-nav .nav-links a.active { color: #111; font-weight: 700; border-bottom: 2px solid #111; padding-bottom: 2px; }
+  .wf-nav .cta-btn { border: 1px solid #111; padding: 6px 16px; font-size: 11px; font-weight: 600; text-decoration: none; color: #111; }
+  .wf-h1 { font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 16px; }
+  .wf-h2 { font-size: 22px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; }
+  .wf-h3 { font-size: 16px; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+  .wf-body { font-size: 14px; color: #666; line-height: 1.6; }
+  .wf-small { font-size: 12px; color: #999; line-height: 1.5; }
+  .wf-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: #999; text-transform: uppercase; margin-bottom: 8px; }
+  .wf-btn { display: inline-block; border: 1px solid #111; padding: 10px 24px; font-size: 13px; font-weight: 600; margin-top: 16px; text-decoration: none; color: #111; }
+  .wf-footer { background: #111; color: #999; padding: 32px 40px; font-size: 11px; line-height: 1.6; }
+  .wf-footer .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+  .wf-footer strong { color: #fff; }
+
+  /* Press specific */
+  .press-filters { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+  .press-filter { padding: 6px 16px; font-size: 12px; border: 1px solid #ddd; color: #666; cursor: pointer; background: #fff; }
+  .press-filter.active { border-color: #111; color: #111; font-weight: 600; }
+  .press-item { display: grid; grid-template-columns: 100px 1fr; gap: 24px; padding: 24px 0; border-bottom: 1px solid #eee; }
+  .press-item:last-child { border-bottom: none; }
+  .press-date { font-size: 13px; color: #999; font-weight: 600; padding-top: 2px; }
+  .press-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; padding: 2px 8px; margin-bottom: 8px; }
+  .press-tag.certification { background: #E8F5E9; color: #2E7D32; }
+  .press-tag.partnership { background: #E3F2FD; color: #1565C0; }
+  .press-tag.funding { background: #FFF3E0; color: #E65100; }
+  .press-tag.research { background: #F3E5F5; color: #7B1FA2; }
+  .press-tag.media { background: #FFF8E1; color: #F57F17; }
+  .press-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+  .press-summary { font-size: 13px; color: #666; line-height: 1.5; }
+  .press-year-header { font-size: 18px; font-weight: 700; color: #111; padding: 16px 0 8px; border-bottom: 2px solid #111; margin-bottom: 8px; margin-top: 24px; }
+  .press-year-header:first-child { margin-top: 0; }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div>
+    <div class="title">PRESS 와이어프레임 — Bell Therapeutics 웹사이트 v2.0</div>
+    <div class="meta">2026. 03. 03 · UX Team</div>
+  </div>
+  <a href="index.html">&larr; 허브로 돌아가기</a>
+</div>
+
+<div class="canvas">
+
+  <!-- NAV -->
+  <div class="wf-section">
+    <div class="wf-section-label">NAV</div>
+    <div class="wf-nav">
+      <a href="wireframe_home.html" class="logo" style="text-decoration:none;color:#111;">BELL THERAPEUTICS</a>
+      <div class="nav-links">
+        <a href="wireframe_home.html">Home</a>
+        <a href="wireframe_science.html">Science & Technology</a>
+        <a href="wireframe_products.html">Products</a>
+        <a href="wireframe_press.html" class="active">Press</a>
+        <a href="wireframe_team.html">Team</a>
+      </div>
+      <a href="wireframe_home.html#contact" class="cta-btn">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="wf-section">
+    <div class="wf-section-label">01 HERO</div>
+    <div class="wf-inner">
+      <div class="wf-label">Press & News</div>
+      <div class="wf-h1">보도자료 및 뉴스</div>
+      <div class="wf-body">Bell Therapeutics의 최신 소식과 미디어 보도를 확인하세요.</div>
+    </div>
+  </div>
+
+  <!-- PRESS LIST -->
+  <div class="wf-section">
+    <div class="wf-section-label">02 PRESS LIST — 14건</div>
+    <div class="wf-inner">
+
+      <!-- Filters -->
+      <div class="press-filters">
+        <div class="press-filter active">전체 (14)</div>
+        <div class="press-filter">인증/규제 (4)</div>
+        <div class="press-filter">파트너십 (4)</div>
+        <div class="press-filter">투자/사업 (3)</div>
+        <div class="press-filter">연구/학회 (2)</div>
+        <div class="press-filter">미디어 (1)</div>
+      </div>
+
+      <!-- 2025 -->
+      <div class="press-year-header">2025</div>
+
+      <div class="press-item">
+        <div class="press-date">2025. 11</div>
+        <div>
+          <span class="press-tag funding">투자/사업</span>
+          <div class="press-title">TIPS 사업화·글로벌 마케팅 프로그램 선정, 3억 원 확보</div>
+          <div class="press-summary">기술보증기금 TIPS 사업화·글로벌 마케팅 프로그램에 선정되어 추가 3억 원의 사업비를 확보했습니다.</div>
+        </div>
+      </div>
+
+      <div class="press-item">
+        <div class="press-date">2025. 09</div>
+        <div>
+          <span class="press-tag partnership">파트너십</span>
+          <div class="press-title">하나보청기와 청각재활 앱 공동개발 MOU 체결</div>
+          <div class="press-summary">국내 보청기 유통 1위 기업 하나보청기와 청각재활 디지털 치료기기 공동개발을 위한 양해각서를 체결했습니다.</div>
+        </div>
+      </div>
+
+      <div class="press-item">
+        <div class="press-date">2025. 06</div>
+        <div>
+          <span class="press-tag certification">인증/규제</span>
+          <div class="press-title">Sleep Thera, 식품의약품안전처 혁신의료기기 지정</div>
+          <div class="press-summary">불면증 디지털 치료기기 Sleep Thera가 식약처 혁신의료기기로 지정되었습니다. 창업 2년 만의 성과입니다.</div>
+        </div>
+      </div>
+
+      <div class="press-item">
+        <div class="press-date">2025. 02</div>
+        <div>
+          <span class="press-tag certification">인증/규제</span>
+          <div class="press-title">Sleep Thera, EU 의료기기 인증 CE MDR 획득</div>
+          <div class="press-summary">Sleep Thera가 유럽연합 의료기기 규정(Medical Device Regulation) CE 인증을 획득하여 유럽 시장 진출의 발판을 마련했습니다.</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="press-year-header">2024</div>
+
+      <div class="press-item">
+        <div class="press-date">2024. 10</div>
+        <div>
+          <span class="press-tag funding">투자/사업</span>
+          <div class="press-title">중소벤처기업부 'Deep Tech TIPS' 선정</div>
+          <div class="press-summary">중소벤처기업부가 운영하는 딥테크 스타트업 육성 프로그램 'Deep Tech TIPS'에 선정되었습니다.</div>
+        </div>
+      </div>
+
+      <div class="press-item">
+        <div class="press-date">2024. 10</div>
+        <div>
+          <span class="press-tag partnership">파트너십</span>
+          <div class="press-title">치매·난청 연구 컨소시엄 'ECHOH' 합류</div>
+          <div class="press-summary">치매와 난청의 연관성을 연구하는 국제 컨소시엄 ECHOH에 참여하여 글로벌 연구 네트워크를 확대했습니다.</div>
+        </div>
+      </div>
+
+      <div class="press-item">
+        <div class="press-date">2024. 08</div>
+        <div>
+          <span class="press-tag certification">인증/규제</span>
+          <div class="press-title">식약처 의료기기 소프트웨어 GMP 인증 취득</div>
+          <div class="press-summary">식품의약품안전처로부터 의료기기 소프트웨어 GMP(Good Manufacturing Practice) 인증을 취득했습니다.</div>
+        </div>
+      </div>
+
+      <div class="press-item">
+        <div class="press-date">2024. 05</div>
+        <div>
+          <span class="press-tag partnership">파트너십</span>
+          <div class="press-title">서울대학교병원 인공와우센터 청각재활 앱 공급 협약 체결</div>
+          <div class="press-summary">서울대학교병원 인공와우센터와 Wowfit 청각재활 앱 공급을 위한 협약을 체결했습니다.</div>
+        </div>
+      </div>
+
+      <div class="press-item">
+        <div class="press-date">2024. 05</div>
+        <div>
+          <span class="press-tag media">미디어</span>
+          <div class="press-title">뇌과학·음악 융합 기업 소개 기사</div>
+          <div class="press-summary">뇌과학과 음악을 융합한 디지털 치료기기 개발 스타트업으로서 벨 테라퓨틱스가 언론에 소개되었습니다.</div>
+        </div>
+      </div>
+
+      <div class="press-item">
+        <div class="press-date">2024. 04</div>
+        <div>
+          <span class="press-tag research">연구/학회</span>
+          <div class="press-title">서울대학교 분당병원과 청각재활 DTx 임상시험 개시</div>
+          <div class="press-summary">서울대학교 분당병원과 공동으로 인공와우 사용자 대상 청각재활 디지털 치료기기 임상시험을 시작했습니다.</div>
+        </div>
+      </div>
+
+      <div class="press-item">
+        <div class="press-date">2024. 02</div>
+        <div>
+          <span class="press-tag research">연구/학회</span>
+          <div class="press-title">미국 ARO 학회에서 인공와우 재활 음악 발표</div>
+          <div class="press-summary">미국 이비인후과 연구학회(ARO: Association for Research in Otolaryngology)에서 인공와우 재활 관련 연구를 발표했습니다.</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="press-year-header">2023</div>
+
+      <div class="press-item">
+        <div class="press-date">2023. 09</div>
+        <div>
+          <span class="press-tag funding">투자/사업</span>
+          <div class="press-title">FuturePlay·HGI·창진원으로부터 시드 투자 유치</div>
+          <div class="press-summary">FuturePlay, HGI, 창업진흥원으로부터 시드 라운드 투자를 유치하며 본격적인 제품 개발과 임상에 착수했습니다.</div>
+        </div>
+      </div>
+
+      <!-- 2022 -->
+      <div class="press-year-header">2022</div>
+
+      <div class="press-item">
+        <div class="press-date">2022. 07</div>
+        <div>
+          <span class="press-tag research">연구/학회</span>
+          <div class="press-title">국제컴퓨터음악학회(ICMC) Works & Research 선정</div>
+          <div class="press-summary">국제컴퓨터음악학회(ICMC: International Computer Music Conference)에서 연구 성과를 인정받아 Works & Research에 선정되었습니다.</div>
+        </div>
+      </div>
+
+      <div class="press-item">
+        <div class="press-date">2022. 06</div>
+        <div>
+          <span class="press-tag partnership">파트너십</span>
+          <div class="press-title">이화여자대학교 음악치료학과 / 서울대병원 신경과 정기영 교수팀 파트너십</div>
+          <div class="press-summary">이화여자대학교 음악치료학과와 연구 협력 파트너십을 체결하고, 서울대학교병원 신경과 정기영 교수팀과 R&D 파트너십을 시작했습니다.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MEDIA CONTACT -->
+  <div class="wf-section">
+    <div class="wf-section-label">03 MEDIA CONTACT</div>
+    <div class="wf-inner" style="text-align:center;">
+      <div class="wf-h2">미디어 문의</div>
+      <div class="wf-body" style="margin-bottom:8px;">보도자료 및 미디어 관련 문의는 아래로 연락해 주세요.</div>
+      <div class="wf-body" style="font-weight:600;color:#111;">contact@belltherapeutics.com</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="wf-section">
+    <div class="wf-section-label">FOOTER</div>
+    <div class="wf-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>BELL THERAPEUTICS</strong><br><br>
+          Bell Therapeutics Inc.<br>
+          서울시 강남구 테헤란로 503<br>
+          contact@belltherapeutics.com<br><br>
+          &copy; 2026 Bell Therapeutics Inc.
+        </div>
+        <div>
+          <strong>Pages</strong><br><br>
+          <a href="wireframe_home.html" style="color:#999;text-decoration:none;">Home</a><br>
+          <a href="wireframe_science.html" style="color:#999;text-decoration:none;">Science & Technology</a><br>
+          <a href="wireframe_products.html" style="color:#999;text-decoration:none;">Products</a><br>
+          <a href="wireframe_press.html" style="color:#999;text-decoration:none;">Press</a><br>
+          <a href="wireframe_team.html" style="color:#999;text-decoration:none;">Team</a>
+        </div>
+        <div>
+          <strong>Connect</strong><br><br>
+          LinkedIn<br>
+          Instagram<br><br>
+          <strong>Legal</strong><br><br>
+          Privacy Policy<br>
+          Terms of Service
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bell Therapeutics — Products 와이어프레임</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #f5f5f5; color: #111; }
+  .doc-header { background: #111; color: #fff; padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .doc-header .title { font-size: 14px; font-weight: 700; }
+  .doc-header .meta { font-size: 11px; color: #999; }
+  .doc-header a { color: #999; text-decoration: none; font-size: 11px; }
+  .doc-header a:hover { color: #fff; }
+  .canvas { max-width: 1200px; margin: 40px auto; padding: 0 48px; }
+  .wf-section { background: #fff; border: 1px solid #ddd; margin-bottom: 2px; position: relative; }
+  .wf-section-label { position: absolute; top: 0; left: -1px; background: #111; color: #fff; font-size: 10px; font-weight: 600; padding: 3px 10px; letter-spacing: 0.5px; }
+  .wf-inner { padding: 48px 40px; }
+  .wf-nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; border-bottom: 1px solid #ddd; font-size: 13px; }
+  .wf-nav .logo { font-weight: 700; letter-spacing: 1px; }
+  .wf-nav .nav-links { display: flex; gap: 32px; }
+  .wf-nav .nav-links a { color: #666; text-decoration: none; }
+  .wf-nav .nav-links a:hover { color: #111; }
+  .wf-nav .nav-links a.active { color: #111; font-weight: 700; border-bottom: 2px solid #111; padding-bottom: 2px; }
+  .wf-nav .cta-btn { border: 1px solid #111; padding: 6px 16px; font-size: 11px; font-weight: 600; text-decoration: none; color: #111; }
+  .wf-h1 { font-size: 32px; font-weight: 700; line-height: 1.3; margin-bottom: 16px; }
+  .wf-h2 { font-size: 22px; font-weight: 700; line-height: 1.3; margin-bottom: 12px; }
+  .wf-h3 { font-size: 16px; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+  .wf-body { font-size: 14px; color: #666; line-height: 1.6; }
+  .wf-small { font-size: 12px; color: #999; line-height: 1.5; }
+  .wf-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: #999; text-transform: uppercase; margin-bottom: 8px; }
+  .wf-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .wf-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .wf-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+  .wf-card { border: 1px solid #ddd; padding: 24px; }
+  .wf-placeholder { background: #f5f5f5; border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px; min-height: 60px; text-align: center; }
+  .wf-stat { text-align: center; }
+  .wf-stat .num { font-size: 36px; font-weight: 700; }
+  .wf-stat .desc { font-size: 12px; color: #666; margin-top: 4px; }
+  .wf-btn { display: inline-block; border: 1px solid #111; padding: 10px 24px; font-size: 13px; font-weight: 600; margin-top: 16px; text-decoration: none; color: #111; }
+  .wf-btn.filled { background: #111; color: #fff; }
+  .wf-divider { border-top: 1px solid #ddd; margin: 32px 0; }
+  .wf-quote { border-left: 3px solid #ddd; padding: 16px 24px; font-size: 14px; font-style: italic; color: #444; line-height: 1.6; }
+  .wf-quote .author { font-style: normal; font-size: 12px; color: #999; margin-top: 8px; }
+  .wf-note { background: #fffbe6; border: 1px solid #ffe58f; padding: 10px 14px; font-size: 11px; color: #666; margin-top: 12px; }
+  .wf-footer { background: #111; color: #999; padding: 32px 40px; font-size: 11px; line-height: 1.6; }
+  .wf-footer .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+  .wf-footer strong { color: #fff; }
+  .wf-tag { display: inline-block; border: 1px solid #ddd; padding: 4px 12px; font-size: 11px; color: #666; margin-right: 8px; margin-bottom: 8px; }
+  .wf-tag.highlight { border-color: #111; color: #111; font-weight: 600; }
+  .product-anchor { display: flex; gap: 2px; margin-bottom: 2px; }
+  .product-anchor a { flex: 1; padding: 16px; text-align: center; font-size: 14px; font-weight: 700; text-decoration: none; color: #666; border: 1px solid #ddd; background: #fff; }
+  .product-anchor a.active { color: #111; border-bottom: 3px solid #111; }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div>
+    <div class="title">PRODUCTS 와이어프레임 — Bell Therapeutics 웹사이트 v2.0</div>
+    <div class="meta">2026. 03. 03 · UX Team</div>
+  </div>
+  <a href="index.html">&larr; 허브로 돌아가기</a>
+</div>
+
+<div class="canvas">
+
+  <!-- NAV -->
+  <div class="wf-section">
+    <div class="wf-section-label">NAV</div>
+    <div class="wf-nav">
+      <a href="wireframe_home.html" class="logo" style="text-decoration:none;color:#111;">BELL THERAPEUTICS</a>
+      <div class="nav-links">
+        <a href="wireframe_home.html">Home</a>
+        <a href="wireframe_science.html">Science & Technology</a>
+        <a href="wireframe_products.html" class="active">Products</a>
+        <a href="wireframe_press.html">Press</a>
+        <a href="wireframe_team.html">Team</a>
+      </div>
+      <a href="wireframe_home.html#contact" class="cta-btn">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="wf-section">
+    <div class="wf-section-label">01 HERO</div>
+    <div class="wf-inner">
+      <div class="wf-label">Products</div>
+      <div class="wf-h1">임상으로 검증된 디지털 치료기기</div>
+      <div class="wf-body">
+        Bell의 제품은 독자적 신경공학 오디오 기술 플랫폼 위에 구축된 소프트웨어 의료기기(SaMD)입니다.<br>
+        모든 제품은 임상시험을 통해 효과와 안전성이 검증되었습니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT ANCHOR -->
+  <div class="product-anchor">
+    <a href="#sleep-thera" class="active">Bell-001 · Sleep Thera</a>
+    <a href="#wowfit">Bell-002 · Wowfit</a>
+  </div>
+
+  <!-- ==================== SLEEP THERA ==================== -->
+  <div class="wf-section" id="sleep-thera">
+    <div class="wf-section-label">02 SLEEP THERA — 불면증 디지털 치료기기</div>
+    <div class="wf-inner">
+      <div class="wf-grid-2">
+        <div>
+          <div class="wf-label">Bell-001</div>
+          <div class="wf-h1">Sleep Thera</div>
+          <div class="wf-h3" style="color:#666;font-weight:400;margin-bottom:16px;">과각성 해소로 수면을 유도하는 디지털 치료기기</div>
+          <div class="wf-body">
+            환자의 생체신호에 맞춘 실시간 바이오피드백 사운드를 제공하여,
+            불면증의 주요 원인인 과각성(hyperarousal)을 해소하고 자연스러운 수면을 유도합니다.
+          </div>
+          <div style="margin-top:16px;">
+            <span class="wf-tag highlight">식약처 혁신의료기기</span>
+            <span class="wf-tag highlight">EU CE MDR 인증</span>
+            <span class="wf-tag">부작용 0건</span>
+            <span class="wf-tag">10~30분 사용</span>
+          </div>
+        </div>
+        <div class="wf-placeholder" style="min-height:300px;">
+          Sleep Thera 제품 비주얼<br>(앱 UI 목업 또는 사용 장면)
+        </div>
+      </div>
+
+      <div class="wf-divider"></div>
+
+      <!-- 시장 & 문제 -->
+      <div class="wf-h3" style="margin-bottom:16px;">불면증 치료의 현실</div>
+      <div class="wf-grid-3" style="margin-bottom:32px;">
+        <div class="wf-stat">
+          <div class="num">2.4억</div>
+          <div class="desc">전 세계 불면증 환자 수</div>
+        </div>
+        <div class="wf-card" style="text-align:center;">
+          <div class="wf-h3">약물 치료의 한계</div>
+          <div class="wf-small" style="margin-top:8px;">졸음, 소화장애, 근육약화<br>현기증, 기억력 저하<br>중독 위험, 내성</div>
+        </div>
+        <div class="wf-card" style="text-align:center;">
+          <div class="wf-h3">CBT-I의 한계</div>
+          <div class="wf-small" style="margin-top:8px;">1차 권고 치료이지만<br>긴 치료 기간<br>높은 중도 포기율</div>
+        </div>
+      </div>
+
+      <!-- 임상 결과 -->
+      <div class="wf-h3" style="margin-bottom:16px;">임상 결과</div>
+      <div class="wf-grid-2" style="margin-bottom:24px;">
+        <div class="wf-card">
+          <div class="wf-h3">입면 어려움 환자 임상</div>
+          <div class="wf-body">입면 어려움 환자에서 즉각적 효과 입증. 부작용 보고 0건.</div>
+          <div class="wf-note">* ISI 점수 변화 등 구체적 수치 확인 필요</div>
+        </div>
+        <div class="wf-card">
+          <div class="wf-h3">입원 환자 급성 불면증 임상</div>
+          <div class="wf-body">입원으로 인한 급성 불면증 환자에서 효능 검증 완료.</div>
+          <div class="wf-note">* 구체적 수치 확인 필요</div>
+        </div>
+      </div>
+
+      <!-- 사용자 후기 -->
+      <div class="wf-quote">
+        "Sleep Thera를 사용하다 보니 어느 순간 빨려드는 느낌을 받았어요."
+        <div class="author">— Sleep Thera 사용자 테스트 참여자</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== WOWFIT ==================== -->
+  <div class="wf-section" id="wowfit">
+    <div class="wf-section-label">03 WOWFIT — 청각재활 디지털 치료기기</div>
+    <div class="wf-inner">
+      <div class="wf-grid-2">
+        <div>
+          <div class="wf-label">Bell-002</div>
+          <div class="wf-h1">Wowfit</div>
+          <div class="wf-h3" style="color:#666;font-weight:400;margin-bottom:16px;">인공와우 사용자를 위한 청각재활 디지털 치료기기</div>
+          <div class="wf-body">
+            신경과학과 물리 음향학을 통합한 Auditory-activation 기술로,
+            청각피질 영역을 단시간에 재정렬하여 재활 기간을 2배 이상 단축합니다.
+          </div>
+          <div style="margin-top:16px;">
+            <span class="wf-tag highlight">서울대병원 임상</span>
+            <span class="wf-tag highlight">재활 기간 2배↓</span>
+            <span class="wf-tag">시공간 제약 없음</span>
+            <span class="wf-tag">비용 절감</span>
+          </div>
+        </div>
+        <div class="wf-placeholder" style="min-height:300px;">
+          Wowfit 제품 비주얼<br>(앱 UI 목업 또는 사용 장면)
+        </div>
+      </div>
+
+      <div class="wf-divider"></div>
+
+      <!-- 시장 & 문제 -->
+      <div class="wf-h3" style="margin-bottom:16px;">인공와우 재활의 현실</div>
+      <div class="wf-grid-3" style="margin-bottom:32px;">
+        <div class="wf-stat">
+          <div class="num">6%</div>
+          <div class="desc">전 세계 인공와우 보급률</div>
+        </div>
+        <div class="wf-card" style="text-align:center;">
+          <div class="wf-h3">긴 재활 기간</div>
+          <div class="wf-small" style="margin-top:8px;">최소 1~2년<br>선천성 난청은 10년 이상</div>
+        </div>
+        <div class="wf-card" style="text-align:center;">
+          <div class="wf-h3">높은 비용</div>
+          <div class="wf-small" style="margin-top:8px;">연간 수천만 원<br>보험 보장 부족</div>
+        </div>
+      </div>
+
+      <!-- 임상 결과 -->
+      <div class="wf-h3" style="margin-bottom:16px;">임상 결과</div>
+      <div class="wf-grid-2" style="margin-bottom:24px;">
+        <div class="wf-card">
+          <div class="wf-h3">서울대 분당병원 임상시험</div>
+          <div class="wf-body">청각재활 DTx 임상시험 진행. 재활 기간 2배 이상 단축 효과 확인.</div>
+        </div>
+        <div class="wf-card">
+          <div class="wf-h3">서울대병원 인공와우센터</div>
+          <div class="wf-body">청각재활 앱 공급 협약 체결. 실제 임상 현장에서 활용 중.</div>
+        </div>
+      </div>
+
+      <!-- BELL's Playlist -->
+      <div class="wf-card" style="border-color:#111;">
+        <div class="wf-h3">BELL's Playlist</div>
+        <div class="wf-body" style="margin-bottom:12px;">
+          인공와우 사용자를 위한 점진적 재활 단계별 음악 플레이리스트.<br>
+          의사·치료사용 환자 음악 감상 보조 자료도 함께 제공됩니다.
+        </div>
+        <span class="wf-btn">Listen Now</span>
+        <span class="wf-btn" style="margin-left:8px;">가이드 다운로드</span>
+      </div>
+
+      <div style="margin-top:24px;">
+        <div class="wf-quote">
+          "주말 동안 Wowfit으로 재활했더니 소리가 더 크고 또렷하게 들려요. 정말 신기합니다."
+          <div class="author">— 인공와우 4년차 사용자</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIPELINE -->
+  <div class="wf-section">
+    <div class="wf-section-label">04 PIPELINE</div>
+    <div class="wf-inner">
+      <div class="wf-label">Pipeline</div>
+      <div class="wf-h2">제품 파이프라인</div>
+      <div class="wf-body" style="margin-bottom:32px;">현재 불면증·청각재활 중심으로 출시되었으며, 향후 다양한 질환 영역으로 확장 예정입니다.</div>
+
+      <div class="wf-placeholder" style="min-height:200px;">
+        파이프라인 로드맵 차트<br><br>
+        Bell-001 Sleep Thera ━━━━━━━━ 임상완료 ━ CE MDR ━ 혁신의료기기 ━ [시판]<br>
+        Bell-002 Wowfit ━━━━━━━━━━━ 임상진행 ━━━━━━━━━━━━━ [임상]<br>
+        Bell-003 (TBD) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ [연구]
+      </div>
+      <div class="wf-note">* 파이프라인 상세는 경영진 확인 후 업데이트</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="wf-section">
+    <div class="wf-section-label">FOOTER</div>
+    <div class="wf-footer">
+      <div class="footer-grid">
+        <div>
+          <strong>BELL THERAPEUTICS</strong><br><br>
+          Bell Therapeutics Inc.<br>
+          서울시 강남구 테헤란로 503<br>
+          contact@belltherapeutics.com<br><br>
+          &copy; 2026 Bell Therapeutics Inc.
+        </div>
+        <div>
+          <strong>Pages</strong><br><br>
+          <a href="wireframe_home.html" style="color:#999;text-decoration:none;">Home</a><br>
+          <a href="wireframe_science.html" style="color:#999;text-decoration:none;">Science & Technology</a><br>
+          <a href="wireframe_products.html" style="color:#999;text-decoration:none;">Products</a><br>
+          <a href="wireframe_press.html" style="color:#999;text-decoration:none;">Press</a><br>
+          <a href="wireframe_team.html" style="color:#999;text-decoration:none;">Team</a>
+        </div>
+        <div>
+          <strong>Connect</strong><br><br>
+          LinkedIn<br>
+          Instagram<br><br>
+          <strong>Legal</strong><br><br>
+          Privacy Policy<br>
+          Terms of Service
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
