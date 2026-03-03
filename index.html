@@ -6,373 +6,130 @@
 <title>Bell Therapeutics — 웹사이트 리뉴얼 2026</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --bell-navy: #0B1F3A;
-    --bell-blue: #1A4A8A;
-    --bell-teal: #0D7A8A;
-    --bell-accent: #00C4CC;
-    --gray-100: #F7F9FB;
-    --gray-200: #E5EBF0;
-    --gray-400: #94A3B8;
-    --gray-600: #4A5568;
-    --gray-800: #1A202C;
-  }
   body {
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--gray-100);
-    color: var(--gray-800);
+    background: #0B1F3A;
+    color: #fff;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* Header */
-  .header {
-    background: var(--bell-navy);
-    color: white;
-    padding: 48px 48px 40px;
+  .container {
+    text-align: center;
+    max-width: 600px;
+    padding: 48px;
   }
-  .header-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .header .logo {
-    font-size: 13px;
+
+  .logo {
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 2px;
-    color: var(--bell-accent);
-    margin-bottom: 16px;
+    color: #00C4CC;
+    margin-bottom: 24px;
   }
-  .header h1 {
+
+  h1 {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 8px;
   }
-  .header .desc {
+
+  .desc {
     font-size: 14px;
-    color: var(--gray-400);
+    color: #94A3B8;
     line-height: 1.6;
-  }
-  .header .meta-row {
-    display: flex;
-    gap: 24px;
-    margin-top: 20px;
-    font-size: 12px;
-    color: var(--gray-400);
-  }
-  .meta-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .meta-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--bell-accent);
-  }
-
-  /* Main */
-  .main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 40px 48px 80px;
-  }
-
-  /* Phase Section */
-  .phase {
     margin-bottom: 48px;
   }
-  .phase-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .phase-num {
-    background: var(--bell-navy);
-    color: var(--bell-accent);
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
-  }
-  .phase-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--bell-navy);
-  }
-  .phase-desc {
-    font-size: 13px;
-    color: var(--gray-600);
-    margin-left: 44px;
-    margin-bottom: 16px;
-  }
 
-  /* Card Grid */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  .toggle-group {
+    display: flex;
     gap: 16px;
-    margin-left: 44px;
+    justify-content: center;
   }
 
-  /* Card */
-  .card {
-    background: white;
-    border-radius: 12px;
-    border: 1px solid var(--gray-200);
-    overflow: hidden;
-    transition: box-shadow 0.2s, transform 0.15s;
-    text-decoration: none;
-    color: inherit;
+  .toggle-btn {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 240px;
+    height: 140px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.2s;
   }
-  .card:hover {
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+
+  .toggle-btn:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: #00C4CC;
     transform: translateY(-2px);
   }
-  .card-thumb {
-    height: 160px;
-    background: var(--bell-navy);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+
+  .toggle-btn .icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    opacity: 0.6;
   }
-  .card-thumb .thumb-icon {
-    font-size: 48px;
-    opacity: 0.15;
-    position: absolute;
-  }
-  .card-thumb .thumb-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    letter-spacing: 0.5px;
-    z-index: 1;
-  }
-  .card-body {
-    padding: 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .card-title {
-    font-size: 15px;
+
+  .toggle-btn .label {
+    font-size: 16px;
     font-weight: 700;
-    color: var(--gray-800);
-    margin-bottom: 6px;
-  }
-  .card-desc {
-    font-size: 12px;
-    color: var(--gray-600);
-    line-height: 1.5;
-    flex: 1;
-  }
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid var(--gray-200);
-  }
-  .card-status {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 4px;
-  }
-  .status-done {
-    background: #D1FAE5;
-    color: #065F46;
-  }
-  .status-progress {
-    background: #FEF3C7;
-    color: #B45309;
-  }
-  .status-todo {
-    background: var(--gray-200);
-    color: var(--gray-600);
-  }
-  .card-version {
-    font-size: 11px;
-    color: var(--gray-400);
-    font-family: monospace;
-  }
-  .card-arrow {
-    font-size: 12px;
-    color: var(--bell-teal);
-    font-weight: 600;
+    letter-spacing: 0.5px;
   }
 
-  /* Disabled card */
-  .card.disabled {
-    opacity: 0.5;
-    pointer-events: none;
-  }
-  .card.disabled .card-thumb {
-    background: var(--gray-600);
+  .toggle-btn .sub {
+    font-size: 11px;
+    color: #94A3B8;
+    margin-top: 6px;
   }
 
-  /* Footer */
-  .footer {
-    background: var(--bell-navy);
-    color: var(--gray-400);
+  .meta {
+    margin-top: 48px;
     font-size: 11px;
-    padding: 20px 48px;
+    color: #4A5568;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .meta a {
+    color: #00C4CC;
+    text-decoration: none;
   }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-inner">
-    <div class="logo">BELL THERAPEUTICS</div>
-    <h1>웹사이트 리뉴얼 2026</h1>
-    <div class="desc">IA 구조와 각 페이지별 텍스트 콘텐츠를 정리하여 디자이너에게 전달하는 허브입니다.</div>
-    <div class="meta-row">
-      <div class="meta-item"><div class="meta-dot"></div> UX Team</div>
-      <div class="meta-item"><div class="meta-dot"></div> 2026. 03</div>
-      <div class="meta-item"><div class="meta-dot"></div> 내부 공유용</div>
-      <div class="meta-item"><a href="https://belltx.notion.site/BELL-312c8aae0ebd808c80ced207fd244e09" target="_blank" style="color:var(--bell-accent);text-decoration:none;">📎 참고: 회사 Notion →</a></div>
-    </div>
-  </div>
-</div>
+<div class="container">
+  <div class="logo">BELL THERAPEUTICS</div>
+  <h1>웹사이트 리뉴얼 2026</h1>
+  <div class="desc">IA 구조와 각 페이지별 텍스트 콘텐츠를 정리하여 디자이너에게 전달하는 허브입니다.</div>
 
-<div class="main">
-
-  <!-- IA -->
-  <div class="phase">
-    <div class="phase-header">
-      <div class="phase-num">1</div>
-      <div class="phase-title">Information Architecture</div>
-    </div>
-    <div class="phase-desc">사이트맵, 네비게이션 구조, 타겟별 콘텐츠 매핑</div>
-    <div class="card-grid">
-
-      <a class="card" href="01_ia_diagram.html">
-        <div class="card-thumb">
-          <div class="thumb-icon">&#9783;</div>
-          <div class="thumb-label">IA DIAGRAM</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">IA 다이어그램</div>
-          <div class="card-desc">네비게이션 구조, 타겟별 콘텐츠 매핑, 사용자 여정, 갭 분석을 포함한 전체 정보 구조도</div>
-          <div class="card-footer">
-            <span class="card-status status-done">완료</span>
-            <span class="card-version">v2.0</span>
-            <span class="card-arrow">열기 →</span>
-          </div>
-        </div>
-      </a>
-
-    </div>
+  <div class="toggle-group">
+    <a class="toggle-btn" href="01_ia_diagram.html">
+      <div class="icon">&#9783;</div>
+      <div class="label">IA</div>
+      <div class="sub">Information Architecture</div>
+    </a>
+    <a class="toggle-btn" href="wireframe_home.html">
+      <div class="icon">&#9634;</div>
+      <div class="label">Wireframe</div>
+      <div class="sub">5개 페이지 · NAV로 전환</div>
+    </a>
   </div>
 
-  <!-- Wireframes -->
-  <div class="phase">
-    <div class="phase-header">
-      <div class="phase-num">2</div>
-      <div class="phase-title">Wireframes</div>
-    </div>
-    <div class="phase-desc">각 페이지에 들어갈 섹션별 텍스트 콘텐츠</div>
-    <div class="card-grid">
-
-      <a class="card" href="wireframe_home.html">
-        <div class="card-thumb">
-          <div class="thumb-icon">&#9634;</div>
-          <div class="thumb-label">HOME</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Home 와이어프레임</div>
-          <div class="card-desc">히어로, 미션 소개, Clinical Evidence 요약, 후기, Contact 섹션</div>
-          <div class="card-footer">
-            <span class="card-status status-done">완료</span>
-            <span class="card-version">v1.0</span>
-            <span class="card-arrow">열기 →</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="wireframe_science.html">
-        <div class="card-thumb">
-          <div class="thumb-icon">&#9881;</div>
-          <div class="thumb-label">SCIENCE</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Science & Technology 와이어프레임</div>
-          <div class="card-desc">기술 플랫폼, 작동 원리, SaMD/DTx 설명, 연구 성과</div>
-          <div class="card-footer">
-            <span class="card-status status-done">완료</span>
-            <span class="card-version">v1.0</span>
-            <span class="card-arrow">열기 →</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="wireframe_products.html">
-        <div class="card-thumb">
-          <div class="thumb-icon">&#9740;</div>
-          <div class="thumb-label">PRODUCTS</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Products 와이어프레임</div>
-          <div class="card-desc">Sleep Thera, Wowfit 상세 + 파이프라인</div>
-          <div class="card-footer">
-            <span class="card-status status-done">완료</span>
-            <span class="card-version">v1.0</span>
-            <span class="card-arrow">열기 →</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="wireframe_press.html">
-        <div class="card-thumb">
-          <div class="thumb-icon">&#9993;</div>
-          <div class="thumb-label">PRESS</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Press 와이어프레임</div>
-          <div class="card-desc">보도자료 14건 전체, 카테고리 필터, 연도별 정렬</div>
-          <div class="card-footer">
-            <span class="card-status status-done">완료</span>
-            <span class="card-version">v1.0</span>
-            <span class="card-arrow">열기 →</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="card" href="wireframe_team.html">
-        <div class="card-thumb">
-          <div class="thumb-icon">&#9734;</div>
-          <div class="thumb-label">TEAM</div>
-        </div>
-        <div class="card-body">
-          <div class="card-title">Team 와이어프레임</div>
-          <div class="card-desc">미션/비전, Core Values, 팀 소개, 채용</div>
-          <div class="card-footer">
-            <span class="card-status status-done">완료</span>
-            <span class="card-version">v1.0</span>
-            <span class="card-arrow">열기 →</span>
-          </div>
-        </div>
-      </a>
-
-    </div>
+  <div class="meta">
+    <span>UX Team · 2026. 03</span>
+    <span>내부 공유용</span>
+    <a href="https://belltx.notion.site/BELL-312c8aae0ebd808c80ced207fd244e09" target="_blank">회사 Notion →</a>
   </div>
-
-</div>
-
-<div class="footer">
-  <div>Bell Therapeutics Inc. — 내부 문서 · 배포 금지</div>
-  <div>UX Team 2026</div>
 </div>
 
 </body>
