@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bell Therapeutics — IA 다이어그램 v1.0</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bell-navy: #0B1F3A;
+    --bell-blue: #1A4A8A;
+    --bell-teal: #0D7A8A;
+    --bell-light: #E8F4F8;
+    --bell-accent: #00C4CC;
+    --gray-100: #F7F9FB;
+    --gray-200: #E5EBF0;
+    --gray-400: #94A3B8;
+    --gray-600: #4A5568;
+    --gray-800: #1A202C;
+    --investor: #5B21B6;
+    --investor-light: #EDE9FE;
+    --hcp: #065F46;
+    --hcp-light: #D1FAE5;
+    --patient: #B45309;
+    --patient-light: #FEF3C7;
+    --shared: #1E40AF;
+    --shared-light: #DBEAFE;
+  }
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--gray-100);
+    color: var(--gray-800);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .page-header {
+    background: var(--bell-navy);
+    color: white;
+    padding: 32px 48px 28px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .page-header .logo { font-size: 22px; font-weight: 700; letter-spacing: 1px; color: var(--bell-accent); }
+  .page-header .subtitle { font-size: 13px; color: #94A3B8; margin-top: 4px; }
+  .page-header .meta { font-size: 12px; color: #64748B; text-align: right; }
+  .page-header .version { font-size: 18px; font-weight: 600; color: white; }
+
+  /* ── Legend ── */
+  .legend-bar {
+    background: white;
+    border-bottom: 1px solid var(--gray-200);
+    padding: 14px 48px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .legend-bar .label { font-size: 11px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; margin-right: 8px; }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--gray-600);
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+
+  /* ── Main Layout ── */
+  .container { padding: 40px 48px; max-width: 1400px; margin: 0 auto; }
+
+  /* ── Target Banner ── */
+  .target-banner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .target-card {
+    border-radius: 10px;
+    padding: 16px 20px;
+    border-left: 4px solid;
+  }
+  .target-card.investor { background: var(--investor-light); border-color: var(--investor); }
+  .target-card.hcp      { background: var(--hcp-light);      border-color: var(--hcp); }
+  .target-card.patient  { background: var(--patient-light);  border-color: var(--patient); }
+  .target-card .tc-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .target-card.investor .tc-title { color: var(--investor); }
+  .target-card.hcp .tc-title      { color: var(--hcp); }
+  .target-card.patient .tc-title  { color: var(--patient); }
+  .target-card .tc-desc { font-size: 11px; color: var(--gray-600); line-height: 1.5; }
+  .target-card .tc-cta { font-size: 11px; font-weight: 600; margin-top: 8px; }
+  .target-card.investor .tc-cta { color: var(--investor); }
+  .target-card.hcp .tc-cta      { color: var(--hcp); }
+  .target-card.patient .tc-cta  { color: var(--patient); }
+
+  /* ── IA Tree ── */
+  .ia-tree { display: flex; flex-direction: column; gap: 0; }
+
+  /* Level 0: Root */
+  .root-node {
+    background: var(--bell-navy);
+    color: white;
+    border-radius: 10px 10px 0 0;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .root-node .rn-title { font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
+  .root-node .rn-url { font-size: 12px; color: var(--bell-accent); font-family: monospace; }
+
+  /* Level 1: Main Nav */
+  .nav-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+    background: var(--bell-blue);
+    padding: 3px;
+  }
+  .nav-item {
+    background: var(--bell-blue);
+    color: white;
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: default;
+    border-radius: 4px;
+    transition: background 0.15s;
+    position: relative;
+  }
+  .nav-item:hover { background: var(--bell-teal); }
+  .nav-item .nav-url { display: block; font-size: 10px; font-family: monospace; color: rgba(255,255,255,0.55); margin-top: 4px; }
+  .nav-item .nav-badge {
+    position: absolute; top: 6px; right: 6px;
+    width: 7px; height: 7px; border-radius: 50%;
+  }
+
+  /* Level 2: Sub pages */
+  .sublevel-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+    background: var(--gray-200);
+    padding: 3px;
+  }
+  .sublevel-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .sub-item {
+    background: white;
+    border-radius: 4px;
+    padding: 10px 10px;
+    font-size: 11px;
+    min-height: 60px;
+    border-left: 3px solid transparent;
+    transition: box-shadow 0.15s;
+  }
+  .sub-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .sub-item .si-title { font-weight: 600; color: var(--gray-800); margin-bottom: 4px; line-height: 1.3; }
+  .sub-item .si-url { font-size: 10px; font-family: monospace; color: var(--gray-400); display: block; margin-bottom: 5px; }
+  .sub-item .si-desc { font-size: 10px; color: var(--gray-600); line-height: 1.4; }
+  .sub-item .si-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
+  .si-tag {
+    font-size: 9px; font-weight: 600; padding: 2px 5px;
+    border-radius: 3px; text-transform: uppercase; letter-spacing: 0.3px;
+  }
+  .si-tag.investor { background: var(--investor-light); color: var(--investor); }
+  .si-tag.hcp      { background: var(--hcp-light);      color: var(--hcp); }
+  .si-tag.patient  { background: var(--patient-light);  color: var(--patient); }
+  .si-tag.shared   { background: var(--shared-light);   color: var(--shared); }
+  .si-tag.new      { background: #FEE2E2; color: #DC2626; }
+
+  /* Sub-item border colors by target */
+  .sub-item.investor { border-color: var(--investor); }
+  .sub-item.hcp      { border-color: var(--hcp); }
+  .sub-item.patient  { border-color: var(--patient); }
+  .sub-item.shared   { border-color: var(--shared); }
+  .sub-item.new-page { border-color: #DC2626; }
+  .sub-item.empty    { background: transparent; border: none; min-height: 0; }
+
+  /* Level 3: Deep pages */
+  .deep-section {
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-top: none;
+    padding: 24px 48px;
+  }
+  .deep-title { font-size: 11px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; }
+  .deep-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .deep-item {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 11px;
+    min-width: 180px;
+  }
+  .deep-item .di-page { font-weight: 600; color: var(--gray-800); margin-bottom: 3px; }
+  .deep-item .di-url { font-size: 10px; font-family: monospace; color: var(--gray-400); }
+
+  /* ── Key Journeys ── */
+  .journeys-section { margin-top: 40px; }
+  .section-title {
+    font-size: 16px; font-weight: 700; color: var(--bell-navy);
+    margin-bottom: 20px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--bell-accent);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .journey-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .journey-card {
+    border-radius: 10px; padding: 20px;
+    border: 1px solid var(--gray-200);
+    background: white;
+  }
+  .journey-card .jc-head {
+    font-size: 13px; font-weight: 700; margin-bottom: 14px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--gray-200);
+  }
+  .journey-card.investor .jc-head { color: var(--investor); }
+  .journey-card.hcp      .jc-head { color: var(--hcp); }
+  .journey-card.patient  .jc-head { color: var(--patient); }
+  .journey-steps { display: flex; flex-direction: column; gap: 6px; }
+  .j-step {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 11px; color: var(--gray-600);
+  }
+  .j-step .step-num {
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0;
+    color: white;
+  }
+  .journey-card.investor .step-num { background: var(--investor); }
+  .journey-card.hcp      .step-num { background: var(--hcp); }
+  .journey-card.patient  .step-num { background: var(--patient); }
+  .j-step .step-text { line-height: 1.4; padding-top: 2px; }
+  .j-step .step-page { font-weight: 600; color: var(--gray-800); }
+  .j-arrow { font-size: 10px; color: var(--gray-400); text-align: center; }
+
+  /* ── Gap Analysis ── */
+  .gap-section { margin-top: 40px; }
+  .gap-table { width: 100%; border-collapse: collapse; font-size: 12px; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .gap-table th { background: var(--bell-navy); color: white; padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .gap-table td { padding: 11px 16px; border-bottom: 1px solid var(--gray-200); color: var(--gray-600); vertical-align: top; }
+  .gap-table tr:last-child td { border-bottom: none; }
+  .gap-table tr:hover td { background: var(--gray-100); }
+  .badge-new { background: #FEE2E2; color: #DC2626; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+  .badge-improve { background: #FEF3C7; color: #B45309; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+  .badge-keep { background: #D1FAE5; color: #065F46; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+
+  /* ── Footer ── */
+  .page-footer {
+    margin-top: 48px; padding: 24px 48px;
+    background: var(--bell-navy); color: var(--gray-400);
+    font-size: 11px; display: flex; justify-content: space-between;
+  }
+
+  /* ── Connector lines ── */
+  .connector { text-align: center; color: var(--gray-400); font-size: 14px; padding: 2px 0; background: var(--gray-200); }
+
+  .nav-badge.investor { background: var(--investor); }
+  .nav-badge.hcp      { background: var(--hcp); }
+  .nav-badge.patient  { background: var(--patient); }
+  .nav-badge.shared   { background: var(--bell-accent); }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="page-header">
+  <div>
+    <div class="logo">BELL THERAPEUTICS</div>
+    <div class="subtitle">Information Architecture v1.0 — 웹사이트 리브랜딩</div>
+  </div>
+  <div class="meta">
+    <div class="version">IA Diagram</div>
+    <div style="margin-top:4px;">2026. 03. 03</div>
+  </div>
+</div>
+
+<!-- Legend -->
+<div class="legend-bar">
+  <span class="label">타겟 범례</span>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--investor)"></div> 투자자 / 파트너</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--hcp)"></div> 의료기관 / HCP</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--patient)"></div> 환자 / 보호자</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--bell-accent)"></div> 전체 공통</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#DC2626"></div> 신규 페이지 (현재 없음)</div>
+</div>
+
+<div class="container">
+
+  <!-- Target Cards -->
+  <div class="target-banner">
+    <div class="target-card investor">
+      <div class="tc-title">🏦 투자자 / 파트너</div>
+      <div class="tc-desc">VC, 제약사, 연구기관<br>관심사: 파이프라인, 팀 역량, 시장 규모, 규제 인증</div>
+      <div class="tc-cta">→ Science · Pipeline · Team · Press</div>
+    </div>
+    <div class="target-card hcp">
+      <div class="tc-title">🏥 의료기관 / HCP</div>
+      <div class="tc-desc">종합병원, 수면클리닉, 청각재활센터<br>관심사: 임상 근거, 처방 프로세스, 보험 적용</div>
+      <div class="tc-cta">→ Science · Products · Contact</div>
+    </div>
+    <div class="target-card patient">
+      <div class="tc-title">👤 환자 / 보호자</div>
+      <div class="tc-desc">불면증 환자, 인공와우 사용자, 보호자<br>관심사: 효과, 안전성, 사용 편의성, 접근 방법</div>
+      <div class="tc-cta">→ Products(Sleep Thera · Wowfit) · Press</div>
+    </div>
+  </div>
+
+  <!-- IA Tree -->
+  <div class="ia-tree">
+
+    <!-- Root -->
+    <div class="root-node">
+      <div>
+        <div class="rn-title">belltherapeutics.com</div>
+        <div style="font-size:12px;color:#94A3B8;margin-top:4px;">네비게이션 5개 항목 · 총 12+ 페이지</div>
+      </div>
+      <div style="font-size:12px;color:var(--bell-accent);">글로벌 EN 기본 · 한국어 지원</div>
+    </div>
+
+    <!-- Nav Level 1 -->
+    <div class="nav-row">
+      <div class="nav-item">
+        <div class="nav-badge shared"></div>
+        Home
+        <span class="nav-url">/</span>
+      </div>
+      <div class="nav-item">
+        <div class="nav-badge investor" style="background:var(--investor)"></div>
+        Science &amp;<br>Technology
+        <span class="nav-url">/science</span>
+      </div>
+      <div class="nav-item">
+        <div class="nav-badge shared"></div>
+        Products &amp;<br>Pipeline
+        <span class="nav-url">/products</span>
+      </div>
+      <div class="nav-item">
+        <div class="nav-badge shared"></div>
+        Team
+        <span class="nav-url">/team</span>
+      </div>
+      <div class="nav-item">
+        <div class="nav-badge shared"></div>
+        Press
+        <span class="nav-url">/press</span>
+      </div>
+    </div>
+
+    <!-- Sub Level 2 -->
+    <div class="sublevel-grid">
+
+      <!-- Home -->
+      <div class="sublevel-col">
+        <div class="sub-item shared">
+          <div class="si-url">/</div>
+          <div class="si-title">Homepage</div>
+          <div class="si-desc">히어로(미션 + 비전), "벨이 일하는 방식 →" CTA(/team), 임상 근거 요약, 제품 요약, 수치 임팩트, Our Story, Partners, Contact</div>
+          <div class="si-tags">
+            <span class="si-tag shared">공통</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Science & Technology -->
+      <div class="sublevel-col">
+        <div class="sub-item investor new-page">
+          <div class="si-url">/science</div>
+          <div class="si-title">Platform Overview</div>
+          <div class="si-desc">뇌공학 + 오디오신호처리 기술 플랫폼</div>
+          <div class="si-tags"><span class="si-tag investor">투자자</span><span class="si-tag new">신규</span></div>
+        </div>
+        <div class="sub-item investor new-page">
+          <div class="si-url">/science/neuroengineering</div>
+          <div class="si-title">Neuroengineering</div>
+          <div class="si-desc">과각성 해소 메커니즘, 청각피질 재정렬</div>
+          <div class="si-tags"><span class="si-tag investor">투자자</span><span class="si-tag new">신규</span></div>
+        </div>
+        <div class="sub-item hcp new-page">
+          <div class="si-url">/science/evidence</div>
+          <div class="si-title">Clinical Evidence</div>
+          <div class="si-desc">RCT 결과, 임상시험 현황, Publications, 처방 가이드</div>
+          <div class="si-tags"><span class="si-tag hcp">HCP</span><span class="si-tag investor">투자자</span><span class="si-tag new">신규</span></div>
+        </div>
+      </div>
+
+      <!-- Products & Pipeline -->
+      <div class="sublevel-col">
+        <div class="sub-item shared">
+          <div class="si-url">/products</div>
+          <div class="si-title">Pipeline Overview</div>
+          <div class="si-desc">Phase 차트, 개발 로드맵</div>
+          <div class="si-tags"><span class="si-tag investor">투자자</span><span class="si-tag shared">공통</span></div>
+        </div>
+        <div class="sub-item patient">
+          <div class="si-url">/products/sleep-thera</div>
+          <div class="si-title">Sleep Thera</div>
+          <div class="si-desc">Bell-001 · 불면증 DTx (환자 가이드 + HCP 임상 데이터 + FAQ)</div>
+          <div class="si-tags"><span class="si-tag patient">환자</span><span class="si-tag hcp">HCP</span></div>
+        </div>
+        <div class="sub-item patient">
+          <div class="si-url">/products/wowfit</div>
+          <div class="si-title">Wowfit</div>
+          <div class="si-desc">Bell-002 · 청각재활 DTx (환자 가이드 + HCP 임상 데이터 + 체험 신청)</div>
+          <div class="si-tags"><span class="si-tag patient">환자</span><span class="si-tag hcp">HCP</span></div>
+        </div>
+      </div>
+
+      <!-- Team -->
+      <div class="sublevel-col">
+        <div class="sub-item shared">
+          <div class="si-url">/team</div>
+          <div class="si-title">Team Overview</div>
+          <div class="si-desc">경영진, 자문단, 연구팀</div>
+          <div class="si-tags"><span class="si-tag investor">투자자</span><span class="si-tag shared">공통</span></div>
+        </div>
+        <div class="sub-item shared new-page">
+          <div class="si-url">/team/core-values</div>
+          <div class="si-title">Core Values</div>
+          <div class="si-desc">Empathy · Integrity · Excellence · Curiosity (상세 Behaviors)</div>
+          <div class="si-tags"><span class="si-tag shared">공통</span><span class="si-tag new">신규</span></div>
+        </div>
+        <div class="sub-item shared">
+          <div class="si-url">/team/careers</div>
+          <div class="si-title">Careers</div>
+          <div class="si-desc">채용 공고, 벨의 문화</div>
+          <div class="si-tags"><span class="si-tag shared">공통</span></div>
+        </div>
+      </div>
+
+      <!-- Press -->
+      <div class="sublevel-col">
+        <div class="sub-item shared">
+          <div class="si-url">/press</div>
+          <div class="si-title">Press / News</div>
+          <div class="si-desc">보도자료, 수상 내역</div>
+          <div class="si-tags"><span class="si-tag shared">공통</span></div>
+        </div>
+      </div>
+
+    </div><!-- /sublevel-grid -->
+
+  </div><!-- /ia-tree -->
+
+  <!-- Key User Journeys -->
+  <div class="journeys-section">
+    <div class="section-title">🗺 핵심 사용자 여정 (Key User Journeys)</div>
+    <div class="journey-grid">
+
+      <div class="journey-card investor">
+        <div class="jc-head">🏦 투자자 / 파트너 여정</div>
+        <div class="journey-steps">
+          <div class="j-step">
+            <div class="step-num">1</div>
+            <div class="step-text"><span class="step-page">Homepage</span> — 수치 임팩트, 미션 확인</div>
+          </div>
+          <div class="j-arrow">↓</div>
+          <div class="j-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><span class="step-page">Science & Technology</span> — 플랫폼 기술 이해</div>
+          </div>
+          <div class="j-arrow">↓</div>
+          <div class="j-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><span class="step-page">Products & Pipeline</span> — 개발 단계 확인</div>
+          </div>
+          <div class="j-arrow">↓</div>
+          <div class="j-step">
+            <div class="step-num">4</div>
+            <div class="step-text"><span class="step-page">Team</span> — 팀 역량·Core Values 검토</div>
+          </div>
+          <div class="j-arrow">↓</div>
+          <div class="j-step">
+            <div class="step-num">5</div>
+            <div class="step-text"><span class="step-page">Home / Contact</span> — 미팅 요청</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-card hcp">
+        <div class="jc-head">🏥 의료기관 / HCP 여정</div>
+        <div class="journey-steps">
+          <div class="j-step">
+            <div class="step-num">1</div>
+            <div class="step-text"><span class="step-page">Homepage</span> 또는 직접 검색 유입</div>
+          </div>
+          <div class="j-arrow">↓</div>
+          <div class="j-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><span class="step-page">Science / Clinical Evidence</span> — 임상 근거·처방 가이드 검토</div>
+          </div>
+          <div class="j-arrow">↓</div>
+          <div class="j-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><span class="step-page">Products</span> — 제품별 임상 데이터 확인</div>
+          </div>
+          <div class="j-arrow">↓</div>
+          <div class="j-step">
+            <div class="step-num">4</div>
+            <div class="step-text"><span class="step-page">Home / Contact</span> — 파트너십/처방 협의</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-card patient">
+        <div class="jc-head">👤 환자 / 보호자 여정</div>
+        <div class="journey-steps">
+          <div class="j-step">
+            <div class="step-num">1</div>
+            <div class="step-text">SNS · 검색 · 병원 추천으로 유입</div>
+          </div>
+          <div class="j-arrow">↓</div>
+          <div class="j-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><span class="step-page">Product 랜딩</span> — 제품 소개·효과·안전성 확인</div>
+          </div>
+          <div class="j-arrow">↓</div>
+          <div class="j-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><span class="step-page">환자 가이드 / FAQ</span> — 의문점 해소</div>
+          </div>
+          <div class="j-arrow">↓</div>
+          <div class="j-step">
+            <div class="step-num">4</div>
+            <div class="step-text"><span class="step-page">체험 신청 / 앱 다운로드</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Gap Analysis -->
+  <div class="gap-section">
+    <div class="section-title">📊 현재 → 신규 IA 갭 분석</div>
+    <table class="gap-table">
+      <thead>
+        <tr>
+          <th>페이지</th>
+          <th>상태</th>
+          <th>현재 문제</th>
+          <th>개선 방향</th>
+          <th>주 타겟</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Homepage</strong></td>
+          <td><span class="badge-improve">개선</span></td>
+          <td>타겟 구분 없음, 미션/밸류 부재</td>
+          <td>히어로(미션+비전), "벨이 일하는 방식" → Team, 임상근거 요약, 제품, 수치, Our Story, Partners, Contact을 원페이지 스크롤로 통합</td>
+          <td>전체</td>
+        </tr>
+        <tr>
+          <td><strong>Science & Technology</strong></td>
+          <td><span class="badge-new">신규</span></td>
+          <td>기술 설명이 제품 페이지에 분산</td>
+          <td>뇌공학 플랫폼 + 오디오신호처리 통합 설명, 특허 현황</td>
+          <td>투자자, HCP</td>
+        </tr>
+        <tr>
+          <td><strong>Clinical Evidence</strong></td>
+          <td><span class="badge-new">신규</span></td>
+          <td>임상 근거 페이지 전무</td>
+          <td>RCT 결과, 논문 목록, 임상시험 현황 (ClinicalTrials 링크)</td>
+          <td>HCP, 투자자</td>
+        </tr>
+        <tr>
+          <td><strong>Products & Pipeline</strong></td>
+          <td><span class="badge-improve">개선</span></td>
+          <td>파이프라인 이미지만 존재, 인터랙션 없음</td>
+          <td>Phase별 인터랙티브 차트, 제품별 랜딩 분리</td>
+          <td>투자자, 공통</td>
+        </tr>
+        <tr>
+          <td><strong>Press / News</strong></td>
+          <td><span class="badge-keep">유지</span></td>
+          <td>목록만 있고 필터 없음</td>
+          <td>카테고리 필터 추가 (투자·규제·파트너십·수상)</td>
+          <td>공통</td>
+        </tr>
+        <tr>
+          <td><strong>Sleep Thera 랜딩</strong></td>
+          <td><span class="badge-improve">개선</span></td>
+          <td>HCP/환자 콘텐츠 혼재</td>
+          <td>HCP용 임상 데이터 ↔ 환자용 사용 가이드 분리 탭</td>
+          <td>환자, HCP</td>
+        </tr>
+        <tr>
+          <td><strong>Wowfit 랜딩</strong></td>
+          <td><span class="badge-improve">개선</span></td>
+          <td>HCP/환자 콘텐츠 혼재</td>
+          <td>BELL's Playlist 강화, 재활 단계 시각화, 체험 신청 CTA</td>
+          <td>환자, HCP</td>
+        </tr>
+        <tr>
+          <td><strong>Team & Core Values</strong></td>
+          <td><span class="badge-new">신규</span></td>
+          <td>팀·가치 페이지 없음</td>
+          <td>경영진/연구팀 + Core Values(Empathy·Integrity·Excellence·Curiosity) 독립 페이지</td>
+          <td>투자자, 공통</td>
+        </tr>
+        <tr>
+          <td><strong>Careers</strong></td>
+          <td><span class="badge-improve">개선</span></td>
+          <td>외부 Notion 링크로 이탈</td>
+          <td>Team 하위로 이동, 벨의 문화 + 채용 통합</td>
+          <td>공통</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /container -->
+
+<div class="page-footer">
+  <div>Bell Therapeutics Inc. — 내부 문서 · 배포 금지</div>
+  <div>IA v1.4 · 다음 단계: 주요 페이지 와이어프레임 제작</div>
+</div>
+
+</body>
+</html>
