@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bell Therapeutics — Products 와이어프레임</title>
+<title>Bell Therapeutics — Pipeline 와이어프레임</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #f5f5f5; color: #111; }
@@ -34,7 +34,6 @@
   .wf-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: #999; text-transform: uppercase; margin-bottom: 8px; }
   .wf-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .wf-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
-  .wf-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
   .wf-card { border: 1px solid #ddd; padding: 24px; }
   .wf-placeholder { background: #f5f5f5; border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px; min-height: 60px; text-align: center; }
   .wf-stat { text-align: center; }
@@ -51,9 +50,26 @@
   .wf-footer strong { color: #fff; }
   .wf-tag { display: inline-block; border: 1px solid #ddd; padding: 4px 12px; font-size: 11px; color: #666; margin-right: 8px; margin-bottom: 8px; }
   .wf-tag.highlight { border-color: #111; color: #111; font-weight: 600; }
-  .product-anchor { display: flex; gap: 2px; margin-bottom: 2px; }
-  .product-anchor a { flex: 1; padding: 16px; text-align: center; font-size: 14px; font-weight: 700; text-decoration: none; color: #666; border: 1px solid #ddd; background: #fff; }
-  .product-anchor a.active { color: #111; border-bottom: 3px solid #111; }
+
+  /* Pipeline Table */
+  .pipeline-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+  .pipeline-table th {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.5px; color: #999;
+    text-transform: uppercase; padding: 8px 12px; text-align: center;
+    border-bottom: 2px solid #111;
+  }
+  .pipeline-table th:first-child { text-align: left; width: 200px; }
+  .pipeline-table td { padding: 16px 12px; border-bottom: 1px solid #eee; vertical-align: middle; text-align: center; }
+  .pipeline-table td:first-child { text-align: left; }
+  .pipeline-name { font-size: 14px; font-weight: 700; }
+  .pipeline-indication { font-size: 11px; color: #666; margin-top: 2px; }
+  .stage { height: 28px; border-radius: 2px; margin: 0 2px; }
+  .stage.done { background: #111; }
+  .stage.active { background: #111; position: relative; }
+  .stage.active::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border-left: 6px solid #111; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+  .stage.future { background: #f0f0f0; border: 1px dashed #ccc; }
+  .stage-label { font-size: 9px; color: #fff; line-height: 28px; font-weight: 600; letter-spacing: 0.3px; }
+  .stage.future .stage-label { color: #ccc; }
 </style>
 </head>
 <body>
@@ -79,7 +95,7 @@
       <div class="nav-links">
         <a href="wireframe_home.html">Home</a>
         <a href="wireframe_science.html">Science & Technology</a>
-        <a href="wireframe_products.html" class="active">Products</a>
+        <a href="wireframe_pipeline.html" class="active">Pipeline</a>
         <a href="wireframe_press.html">Press</a>
         <a href="wireframe_team.html">Team</a>
       </div>
@@ -91,27 +107,80 @@
   <div class="wf-section">
     <div class="wf-section-label">01 HERO</div>
     <div class="wf-inner">
-      <div class="wf-label">Products</div>
-      <div class="wf-h1">임상으로 검증된 디지털 치료기기</div>
+      <div class="wf-label">Pipeline</div>
+      <div class="wf-h1">뇌과학 기반 디지털 치료기기 파이프라인</div>
       <div class="wf-body">
-        Bell의 제품은 독자적 신경공학 오디오 기술 플랫폼 위에 구축된 소프트웨어 의료기기(SaMD)입니다.<br>
-        임상시험을 통해 효과와 안전성을 검증하고 있습니다.
+        Bell의 파이프라인은 독자적 신경공학 오디오 기술 플랫폼 위에 구축됩니다.<br>
+        불면증·청각재활을 시작으로, 다양한 질환 영역으로 확장해 나갑니다.
       </div>
     </div>
   </div>
 
-  <!-- PRODUCT ANCHOR -->
-  <div class="product-anchor">
-    <a href="#sleep-thera" class="active">Bell-001 · Sleep Thera</a>
-    <a href="#wowfit">Bell-002 · Wowfit</a>
+  <!-- PIPELINE OVERVIEW -->
+  <div class="wf-section">
+    <div class="wf-section-label">02 PIPELINE OVERVIEW</div>
+    <div class="wf-inner">
+      <div class="wf-label">Overview</div>
+      <div class="wf-h2">개발 현황</div>
+
+      <table class="pipeline-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Discovery</th>
+            <th>Preclinical</th>
+            <th>Clinical</th>
+            <th>Regulatory</th>
+            <th>Market</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="pipeline-name">Bell-001 · Sleep Thera</div>
+              <div class="pipeline-indication">불면증 DTx</div>
+            </td>
+            <td><div class="stage done"><div class="stage-label">완료</div></div></td>
+            <td><div class="stage done"><div class="stage-label">완료</div></div></td>
+            <td><div class="stage done"><div class="stage-label">완료</div></div></td>
+            <td><div class="stage done"><div class="stage-label">CE MDR · 혁신</div></div></td>
+            <td><div class="stage active"><div class="stage-label">출시</div></div></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="pipeline-name">Bell-002 · Wowfit</div>
+              <div class="pipeline-indication">청각재활 DTx</div>
+            </td>
+            <td><div class="stage done"><div class="stage-label">완료</div></div></td>
+            <td><div class="stage done"><div class="stage-label">완료</div></div></td>
+            <td><div class="stage active"><div class="stage-label">진행 중</div></div></td>
+            <td><div class="stage future"><div class="stage-label">—</div></div></td>
+            <td><div class="stage future"><div class="stage-label">—</div></div></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="pipeline-name">Bell-003 · TBD</div>
+              <div class="pipeline-indication">확장 영역</div>
+            </td>
+            <td><div class="stage active"><div class="stage-label">연구</div></div></td>
+            <td><div class="stage future"><div class="stage-label">—</div></div></td>
+            <td><div class="stage future"><div class="stage-label">—</div></div></td>
+            <td><div class="stage future"><div class="stage-label">—</div></div></td>
+            <td><div class="stage future"><div class="stage-label">—</div></div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="wf-note">* 파이프라인 상세는 경영진 확인 후 업데이트</div>
+    </div>
   </div>
 
   <!-- ==================== SLEEP THERA ==================== -->
   <div class="wf-section" id="sleep-thera">
-    <div class="wf-section-label">02 SLEEP THERA — 불면증 디지털 치료기기</div>
+    <div class="wf-section-label">03 SLEEP THERA — Bell-001</div>
     <div class="wf-inner">
 
-      <!-- 1) 문제 인식 -->
+      <!-- 문제 인식 -->
       <div class="wf-label">Bell-001 · Sleep Thera</div>
       <div class="wf-h2" style="margin-bottom:16px;">불면증 치료의 현실</div>
       <div class="wf-grid-3" style="margin-bottom:32px;">
@@ -131,7 +200,7 @@
 
       <div class="wf-divider"></div>
 
-      <!-- 2) 해결책 (제품) -->
+      <!-- 해결책 -->
       <div class="wf-grid-2">
         <div>
           <div class="wf-h1">Sleep Thera</div>
@@ -153,7 +222,7 @@
 
       <div class="wf-divider"></div>
 
-      <!-- 3) 증거 (임상 결과) -->
+      <!-- 임상 결과 -->
       <div class="wf-h3" style="margin-bottom:16px;">임상 결과</div>
       <div class="wf-grid-2" style="margin-bottom:24px;">
         <div class="wf-card">
@@ -168,7 +237,7 @@
         </div>
       </div>
 
-      <!-- 4) 사용자 후기 -->
+      <!-- 사용자 후기 -->
       <div class="wf-quote">
         "Sleep Thera를 사용하다 보니 어느 순간 빨려드는 느낌을 받았어요."
         <div class="author">— Sleep Thera 사용자 테스트 참여자</div>
@@ -178,10 +247,10 @@
 
   <!-- ==================== WOWFIT ==================== -->
   <div class="wf-section" id="wowfit">
-    <div class="wf-section-label">03 WOWFIT — 청각재활 디지털 치료기기</div>
+    <div class="wf-section-label">04 WOWFIT — Bell-002</div>
     <div class="wf-inner">
 
-      <!-- 1) 문제 인식 -->
+      <!-- 문제 인식 -->
       <div class="wf-label">Bell-002 · Wowfit</div>
       <div class="wf-h2" style="margin-bottom:16px;">인공와우 재활의 현실</div>
       <div class="wf-grid-3" style="margin-bottom:32px;">
@@ -201,7 +270,7 @@
 
       <div class="wf-divider"></div>
 
-      <!-- 2) 해결책 (제품) -->
+      <!-- 해결책 -->
       <div class="wf-grid-2">
         <div>
           <div class="wf-h1">Wowfit</div>
@@ -224,7 +293,7 @@
 
       <div class="wf-divider"></div>
 
-      <!-- 3) 증거 (임상 결과) -->
+      <!-- 임상 결과 -->
       <div class="wf-h3" style="margin-bottom:16px;">임상 결과</div>
       <div class="wf-grid-2" style="margin-bottom:24px;">
         <div class="wf-card">
@@ -237,7 +306,7 @@
         </div>
       </div>
 
-      <!-- 4) 보조 도구 -->
+      <!-- 보조 도구 -->
       <div class="wf-card" style="border-color:#111;">
         <div class="wf-h3">BELL's Playlist</div>
         <div class="wf-body" style="margin-bottom:12px;">
@@ -248,31 +317,13 @@
         <span class="wf-btn" style="margin-left:8px;">가이드 다운로드</span>
       </div>
 
-      <!-- 5) 사용자 후기 -->
+      <!-- 사용자 후기 -->
       <div style="margin-top:24px;">
         <div class="wf-quote">
           "주말 동안 Wowfit으로 재활했더니 소리가 더 크고 또렷하게 들려요. 정말 신기합니다."
           <div class="author">— 인공와우 4년차 사용자</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- PIPELINE -->
-  <div class="wf-section">
-    <div class="wf-section-label">04 PIPELINE</div>
-    <div class="wf-inner">
-      <div class="wf-label">Pipeline</div>
-      <div class="wf-h2">제품 파이프라인</div>
-      <div class="wf-body" style="margin-bottom:32px;">현재 불면증·청각재활 중심으로 출시되었으며, 향후 다양한 질환 영역으로 확장 예정입니다.</div>
-
-      <div class="wf-placeholder" style="min-height:200px;">
-        파이프라인 로드맵 차트<br><br>
-        Bell-001 Sleep Thera ━━━━━━━━ 임상완료 ━ CE MDR ━ 혁신의료기기 ━ [시판]<br>
-        Bell-002 Wowfit ━━━━━━━━━━━ 임상진행 ━━━━━━━━━━━━━ [임상]<br>
-        Bell-003 (TBD) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ [연구]
-      </div>
-      <div class="wf-note">* 파이프라인 상세는 경영진 확인 후 업데이트</div>
     </div>
   </div>
 
@@ -292,7 +343,7 @@
           <strong>Pages</strong><br><br>
           <a href="wireframe_home.html" style="color:#999;text-decoration:none;">Home</a><br>
           <a href="wireframe_science.html" style="color:#999;text-decoration:none;">Science & Technology</a><br>
-          <a href="wireframe_products.html" style="color:#999;text-decoration:none;">Products</a><br>
+          <a href="wireframe_pipeline.html" style="color:#999;text-decoration:none;">Pipeline</a><br>
           <a href="wireframe_press.html" style="color:#999;text-decoration:none;">Press</a><br>
           <a href="wireframe_team.html" style="color:#999;text-decoration:none;">Team</a>
         </div>
